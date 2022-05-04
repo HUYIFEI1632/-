@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mapper.EmpMapper">
+	<!-- ログインユーザーを検索 -->
+	<resultMap type="com.example.demo.bean.EmpData"
+		id="empResultMap">
+		<id property="empCd" column="empCd" />
+		<result property="name" column="name" />
+		<result property="birthday" column="birthday" />
+		<result property="nationality.nationalityName"
+			column="nationalityName" />
+		<result property="nationality.nationalityCd"
+			column="nationalityCd" />
+		<result property="gender.genderCd" column="genderCd" />
+		<result property="gender.genderName" column="genderName" />
+	</resultMap> 
+	<!-- 社员情報一览-->
+    <select id="listEmp" resultMap="empResultMap"> 
+		 select e.empCd,e.name,e.birthday,n.nationalityName,g.genderName from empData e ,nationality n,gender g 
+    where e.nationalityCd=n.nationalityCd and e.genderCd=g.genderCd ;
+	</select>
+	<!-- 社员情報検索 -->
+	 <select id="searchEmp" resultMap="empResultMap"> 
+	 select e.empCd,e.name,e.birthday,n.nationalityName,g.genderName from empData e ,nationality n,gender g 
+        where e.nationalityCd=n.nationalityCd and e.genderCd=g.genderCd and conCat(empCd,name,birthday,nationalityName,genderName)
+        LIKE #{0};
+        <!-- 詳細情報 -->
+	</select>
+	 <select id="getEmpData" resultMap="empResultMap"> 
+	 select e.empCd,e.name,e.birthday,n.nationalityName,g.genderName ,g.genderCd,n.nationalityCd from empData e ,nationality n,gender g 
+        where e.nationalityCd=n.nationalityCd and e.genderCd=g.genderCd and empCd=#{0};
+	</select>
+	<!-- 社員情報登録 -->
+	  <insert id="insertEmp"  parameterType="com.example.demo.form.EmpForm">
+	insert into empData (empCd,name,birthday,nationalityCd,genderCd) 
+	values (#{empCd},#{name},#{birthday},#{nationalityCd},#{genderCd});
+	</insert>
+	<!-- 社員情報変更 -->
+	<update id="changeEmp" parameterType="com.example.demo.form.EmpForm">
+	UPDATE empData set name=#{name},birthday=#{birthday},genderCd=#{genderCd},nationalityCd=#{nationalityCd}
+	 where empCd=#{empCd};
+	</update>
+</mapper>

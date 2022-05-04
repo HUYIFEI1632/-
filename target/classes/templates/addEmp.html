@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{common/empLayout}">  
+<body >
+<div layout:fragment="content">
+        <h1 align="center" th:text="#{empAdd}"></h1>
+	    <div id="div1">
+		<form action="/login"><input type="submit" class="btn btn-warning" th:value="#{logout}"></form>				
+	</div>
+	<div align="center">
+		<form method="post" action="/addEmp" th:object="${form}">
+			<!-- 入力テーブル -->
+			  <div th:inline="text"  th:each="message:${errorList}">
+			<span>[[${message.defaultMessage}]]</span>   
+			</div>
+			<table class="addTable">
+			 <tr th:inline="text" > 
+			</tr>
+				<tr>
+					<td>[[#{empCd}]]</td>
+					<td><input type="text" class="form-control" id="empCd" name="empCd" value="" th:field="*{empCd}" /></td>
+					<td>[[#{need}]]</td>
+				</tr>
+				<tr>
+					<td>[[#{name}]]</td>
+					<td><input type="text" class="form-control" id="name" name="name" value="" th:field="*{name}"/></td>
+					<td>[[#{need}]]</td>
+				</tr>
+				<tr>
+					<td>[[#{gender}]]</td>
+					<td><select id="genderCd" name="genderCd" class="form-control" th:field="*{genderCd}">
+							<option value=""></option>
+							<option th:each="g:${session.genderList}"
+						 th:value="${g.genderCd}" th:text="${g.genderName}"></option>
+					</select></td>
+					<td>[[#{need}]]</td>
+				</tr>
+				<tr>
+					<td>[[#{birthday}]]</td>
+					<td><input type="date" class="form-control" id="birthday" name="birthday" value="" th:field="*{birthday}"></td>
+					<td>[[#{need}]]</td>
+				</tr>
+				<tr>
+					<td>[[#{nationality}]]</td>
+					<td><select id="NationalityCd" name="NationalityCd" class="form-control" th:field="*{NationalityCd}">
+							<option value=""></option>
+							<option th:each="n:${session.nationalityList}"
+							th:value="${n.nationalityCd}" th:text="${n.nationalityName}"></option>
+					
+					</select></td>
+					<td>[[#{need}]]</td>
+				</tr>
+
+			</table>
+			<br>
+			<P>[[${message}]]</P>
+			<span align="center">
+				<input type="submit" th:value="#{confirm}" class="btn btn-primary" />&nbsp;	
+				<a th:href="@{empList}"><input type="button" th:value="#{back}" class="btn btn-primary" ></a>
+			</span>
+			</form>
+
+	</div>
+	<div id="aligncenter" style="color: red">
+		<p></p>
+	</div>
+	<div id="aligncenter">
+		</div>
+	</div>
+</body>
+</html>

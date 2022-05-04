@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{common/empLayout}">
+<body>
+	<div layout:fragment="content">
+		<h1 align="center">[[#{logout}]]</h1>
+		<form method="post" action="/auth" th:object="${form}">
+			<table class="addTable" align="center">
+				<tr>
+					<td th:text="#{userid}" class="text-primary"
+						style="font-size: 25px"></td>
+				</tr>
+				<tr>
+					<td><input type="text" class="form-control" name="accountId"
+						value="" size="40" th:field="*{accountId}"
+						th:placeholder="#{login.userid.placeholder}" /></td>
+				</tr>
+				<tr>
+					<td th:text="#{password}" class="text-primary"
+						style="font-size: 25px"></td>
+				</tr>
+				<tr>
+				<tr>
+					<td><input type="password" class="form-control"
+						name="password" th:field="*{password}" value="" size="40">
+					</td>
+				</tr>
+				<tr th:inline="text" th:each="message : ${errorList}">
+					<td>[[${message.defaultMessage}]]</td>
+				</tr>
+
+				<tr>
+					<td id="show" style="color: red">
+						<p th:text="${message}"></p>
+					</td>
+				</tr>
+				
+				<tr align="center">
+				<td>
+				 <input type="submit"  th:value="#{login}"
+				class="btn btn-primary"/>
+					<br>
+				</td>	
+				</tr>
+	
+			</table>
+				</form>
+	</div>
+</body>
+</html>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<script  type="text/javascript" src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+<link rel="stylesheet" 
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+ <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.18/datatables.min.css" />
+    <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.18/datatables.min.js"></script>
+	<!--  <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"> -->
+<link rel="stylesheet" type="text/css" href="css/style.css">
+<title th:text="#{title}"></title>
+</head> 
+<body>
+<div layout:replace="~{common/empHeader::header}"></div>
+<div layout:fragment="content" th:remove="tag"></div>
+<div layout:replace="~{common/empFooter::footer}"></div>
+</body>
+</html>

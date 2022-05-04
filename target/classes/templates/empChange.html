@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{common/empLayout}">  
+<body>
+<div layout:fragment="content">
+	<h1 align="center">[[#{empChange}]]</h1>
+	<div id="div1">
+		<form action="/login"><button type="submit" class="btn btn-warning">[[#{logout}]]</button></form>
+	</div>
+	<div align="center">
+		<form method="post" action="/empChange" th:object="${form}">
+					<table class="addTable">
+					<tr th:inline="text"  th:each="message:${errorList}">
+			<td>[[${message.defaultMessage}]]</td>   
+			</tr>
+				<tr >
+					<td th:text="#{empCd}"></td>
+					<td><input type="text" th:field="*{empCd}" size="20" readonly class="form-control" /></td>
+				</tr>
+				<tr>
+					<td th:text="#{name}"></td>
+					<td><input type="text" th:field="*{name}" size="20"  class="form-control"/></td>
+				</tr>
+				<tr>
+					<td th:text="#{gender}"></td>
+						<td><select id="genderCd" name="genderCd" class="form-control" th:field="*{genderCd}">
+							<option value=""></option>
+							<option th:each="g:${session.genderList}"
+						 th:value="${g.genderCd}" th:text="${g.genderName}"></option></select></td>
+				</tr>
+				<tr>
+					<td th:text="#{birthday}"></td>
+					<td><input type="date" th:field="*{birthday}" size="20" class="form-control"/></td>
+				</tr>
+				<tr>
+					<td>[[#{nationality}]]</td>
+					<td><select id="NationalityCd" name="NationalityCd" class="form-control" th:field="*{NationalityCd}">
+							<option value=""></option>
+							<option th:each="n:${session.nationalityList}"
+							th:value="${n.nationalityCd}" th:text="${n.nationalityName}" ></option>
+					
+					</select></td>
+				</tr>		
+			</table>
+			<br />
+			<P>[[${message}]]</P>
+			<div align="center">
+				<input  type="submit" class="btn btn-primary" th:value="#{confirm}" />
+				<a th:href="@{empList}"><input type="button" th:value="#{back}" class="btn btn-primary" ></a>
+			</div>
+		</form>
+	</div>
+
+</div>
+</body>
+<br /><br /><br />
+<div class="copyright">©码农吧 https://www.coderbar.com/</div>
+
+</html>
